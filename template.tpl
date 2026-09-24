@@ -70,6 +70,24 @@ ___TEMPLATE_PARAMETERS___
         "name": "transaction_id",
         "displayName": "Transaction ID",
         "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "value",
+        "displayName": "Order Value",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "shipping",
+        "displayName": "Shipping costs",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "tax",
+        "displayName": "Tax",
+        "simpleValueType": true
       }
     ]
   }
@@ -146,6 +164,9 @@ const payload = {
   event_name: getEventData('event_name'),
   currency: data.currency || getEventData('currency') || 'EUR',
   transaction_id: data.transactionId || getEventData('transaction_id'),
+  value: data.value || getEventData('value') || 0,
+  shipping: data.shipping || getEventData('shipping') || 0,
+  tax: data.tax || getEventData('tax') || 0,
   items: items
 };
 
@@ -302,6 +323,18 @@ ___SERVER_PERMISSIONS___
               {
                 "type": 1,
                 "string": "event_name"
+              },
+              {
+                "type": 1,
+                "string": "value"
+              },
+              {
+                "type": 1,
+                "string": "tax"
+              },
+              {
+                "type": 1,
+                "string": "shipping"
               }
             ]
           }
@@ -330,6 +363,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 9/11/2026, 12:04:05 PM
+Created on 9/24/2026, 10:27:09 AM
 
 
