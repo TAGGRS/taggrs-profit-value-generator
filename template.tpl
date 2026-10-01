@@ -89,12 +89,6 @@ ___TEMPLATE_PARAMETERS___
         "name": "value",
         "displayName": "Order Value",
         "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "shipping",
-        "displayName": "Shipping costs",
-        "simpleValueType": true
       }
     ]
   }
@@ -110,6 +104,7 @@ const JSON = require('JSON');
 const logToConsole = require('logToConsole');
 const getType = require('getType');
 const makeNumber = require('makeNumber');
+const makeString = require('makeString');
 const Math = require('Math');
 
 const baseUrl = 'https://connect.taggrs.io';
@@ -160,7 +155,7 @@ for (let i = 0; i < rawItems.length; i++) {
       const quantity = makeNumber(src.quantity);
 
       items.push({
-        item_id: itemId,
+        item_id: makeString(itemId),
         item_name: src.item_name || src.name,
         // NaN !== NaN, so this falls back cleanly on missing or invalid values
         price: price === price ? price : 0,
@@ -176,12 +171,14 @@ if (items.length === 0) {
 }
 
 // ---- Build the payload -----------------------------------------------------
+// IDs are sent as strings, the API rejects numeric values.
+const transactionId = data.transaction_id || getEventData('transaction_id');
+
 const payload = {
   event_name: eventName,
   currency: data.currency || getEventData('currency') || 'EUR',
-  transaction_id: data.transaction_id || getEventData('transaction_id'),
+  transaction_id: transactionId ? makeString(transactionId) : undefined,
   value: data.value || getEventData('value') || 0,
-  shipping: data.shipping || getEventData('shipping') || 0,
   items: items
 };
 
@@ -342,10 +339,6 @@ ___SERVER_PERMISSIONS___
               {
                 "type": 1,
                 "string": "value"
-              },
-              {
-                "type": 1,
-                "string": "shipping"
               }
             ]
           }
