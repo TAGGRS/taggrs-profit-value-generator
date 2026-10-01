@@ -48,6 +48,19 @@ ___TEMPLATE_PARAMETERS___
     ]
   },
   {
+    "type": "TEXT",
+    "name": "eventNames",
+    "displayName": "Event names",
+    "simpleValueType": true,
+    "defaultValue": "purchase",
+    "help": "Comma separated list of event names to calculate the profit value on, e.g. purchase, add_to_cart. Returns undefined for all other events.",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ]
+  },
+  {
     "type": "GROUP",
     "name": "group1",
     "displayName": "Ecommerce Data",
@@ -112,6 +125,15 @@ const rawProductId = data.productId;
 const secret = data.secret;
 const returnValue = data.returnValue || 'profit';
 
+// ---- Event filter ----------------------------------------------------------
+// Only calculate on the configured event names, defaults to purchase.
+const eventName = getEventData('event_name');
+const eventNames = (data.eventNames || 'purchase').split(',').map(name => name.trim());
+
+if (eventNames.indexOf(eventName) === -1) {
+  return undefined;
+}
+
 if (!rawProductId || !secret) {
   logToConsole('TAGGRS - Error: Product ID or Secret is missing.');
   return undefined;
@@ -161,7 +183,7 @@ if (items.length === 0) {
 
 // ---- Build the payload -----------------------------------------------------
 const payload = {
-  event_name: getEventData('event_name'),
+  event_name: eventName,
   currency: data.currency || getEventData('currency') || 'EUR',
   transaction_id: data.transactionId || getEventData('transaction_id'),
   value: data.value || getEventData('value') || 0,

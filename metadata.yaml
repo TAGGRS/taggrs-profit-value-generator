@@ -2,8 +2,10 @@ homepage: "https://taggrs.io/"
 documentation: "https://support.taggrs.io"
 versions:
   # Latest version
+  - sha: 1a39f5e4da268be6d1231d96c0a6f6d57f6ec3e8
+    changeNotes: Added Event names setting. The profit value is now only calculated on purchase by default. Add other event names to keep calculating on them.
+  # Older versions
   - sha: aec21658f2159d3c85586e25d47814321862afa9
     changeNotes: Added support for value, shipping and tax
-  # Older versions
   - sha: 933cb683fc2955bd9b5ef5018edc002bf8d465b6
     changeNotes: Initial release.
