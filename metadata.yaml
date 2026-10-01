@@ -2,8 +2,8 @@ homepage: "https://taggrs.io/"
 documentation: "https://support.taggrs.io"
 versions:
   # Latest version
-  - sha: 00c299690c6a81b854f360d390e204c6ce845a3d
-    changeNotes: Fixed the Transaction ID field being ignored. Removed the Tax field, following the GA4 spec that excludes VAT.
+  - sha: 04f866b2b82731df06e166314c9905bb9f589e1f
+    changeNotes: Fixed the Transaction ID field being ignored. Transaction and item IDs are now sent as strings. Removed the Tax field, following the GA4 spec that excludes VAT, and the unused Shipping field.
   # Older versions
   - sha: 1a39f5e4da268be6d1231d96c0a6f6d57f6ec3e8
     changeNotes: Added Event names setting. The profit value is now only calculated on purchase by default. Add other event names to keep calculating on them.
