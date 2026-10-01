@@ -95,12 +95,6 @@ ___TEMPLATE_PARAMETERS___
         "name": "shipping",
         "displayName": "Shipping costs",
         "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "tax",
-        "displayName": "Tax",
-        "simpleValueType": true
       }
     ]
   }
@@ -185,10 +179,9 @@ if (items.length === 0) {
 const payload = {
   event_name: eventName,
   currency: data.currency || getEventData('currency') || 'EUR',
-  transaction_id: data.transactionId || getEventData('transaction_id'),
+  transaction_id: data.transaction_id || getEventData('transaction_id'),
   value: data.value || getEventData('value') || 0,
   shipping: data.shipping || getEventData('shipping') || 0,
-  tax: data.tax || getEventData('tax') || 0,
   items: items
 };
 
@@ -349,10 +342,6 @@ ___SERVER_PERMISSIONS___
               {
                 "type": 1,
                 "string": "value"
-              },
-              {
-                "type": 1,
-                "string": "tax"
               },
               {
                 "type": 1,
