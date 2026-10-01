@@ -19,6 +19,7 @@ The variable matches each item in the ecommerce event against the product feed c
 | --- | --- | --- |
 | Product ID | Yes | The product identifier found in your TAGGRS dashboard |
 | API Secret | Yes | Generated in the profit tracking tool in your TAGGRS dashboard |
+| Event names | Yes | Comma separated list of event names to calculate the profit value on, e.g. `purchase, add_to_cart`. Defaults to `purchase`. Returns `undefined` for all other events |
 | Items | Yes | The items array of the purchase. Reads from the event data automatically when left empty |
 | Currency | No | The currency of the transaction. Reads from the event data automatically when left empty |
 | Transaction ID | Yes | The unique identifier of the transaction. Reads from the event data automatically when left empty |
